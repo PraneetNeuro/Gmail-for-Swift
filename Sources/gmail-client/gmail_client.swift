@@ -61,4 +61,10 @@ class Gmail {
         }
     }
     
+    class UsersLabels {
+        static func create(userID: String, requestBody: [String : Any]) -> Data? {
+            return API.executeRequest(APIRequest: API.usersLabels.create(userId: userID).request, headers: defaultHeadersWithAuth, requestBody: requestBody)
+        }
+    }
+    
 }
