@@ -23,4 +23,13 @@ class Gmail {
         }
         
     }
+    
+    class UsersDrafts {
+        
+        static func create(userID: String, type: API.resourceContentType, requestBody: [String : Any]) -> Data? {
+            return API.executeRequest(APIRequest: API.usersDrafts.create(userId: userID, type: type).request, headers: ["Authorization" : "Bearer "], requestBody: requestBody)
+        }
+        
+    }
+    
 }
