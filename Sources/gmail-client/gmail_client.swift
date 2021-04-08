@@ -84,15 +84,23 @@ class Gmail {
     }
     
     class UsersMessages {
+        
         static func list(userID: String) -> Data? {
             return API.executeRequest(APIRequest: API.usersMessages.list(userID: userID).request, headers: defaultHeadersWithAuth, requestBody: nil)
         }
+        
+        static func get(userID: String, id: String) -> Data? {
+            return API.executeRequest(APIRequest: API.usersMessages.get(userID: userID, id: id).request, headers: defaultHeadersWithAuth, requestBody: nil)
+        }
+        
     }
     
     class UsersThreads {
+        
         static func get(userID: String, id: String) -> Data? {
             return API.executeRequest(APIRequest: API.usersThreads.get(userID: userID, id: id).request, headers: defaultHeadersWithAuth, requestBody: nil)
         }
+        
     }
     
 }
