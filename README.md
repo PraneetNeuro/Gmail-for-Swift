@@ -18,12 +18,12 @@ Google hasn't included Swift in their list of platforms supported, hence, Gmail-
 - [ ] UsersSettingsSendAssmimeInfo
 - [X] UsersThreads
 ---
--### Documentation
-- [X] Users
-- [X] UsersDrafts
-- [X] UsersHistory
-- [X] UsersLabels
-- [X] UsersMessages
+### Documentation
+- [ ] Users
+- [ ] UsersDrafts
+- [ ] UsersHistory
+- [ ] UsersLabels
+- [ ] UsersMessages
 - [ ] UsersMessagesAttachments
 - [ ] UsersSettings
 - [ ] UsersSettingsDelegates
@@ -31,4 +31,4 @@ Google hasn't included Swift in their list of platforms supported, hence, Gmail-
 - [ ] UsersSettingsForwardingAddresses
 - [ ] UsersSettingsSendAs
 - [ ] UsersSettingsSendAssmimeInfo
-- [X] UsersThreads
+- [ ] UsersThreads
