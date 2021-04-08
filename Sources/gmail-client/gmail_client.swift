@@ -41,6 +41,12 @@ class Gmail {
         static func list(userID: String) -> Data? {
             return API.executeRequest(APIRequest: API.usersDrafts.list(userId: userID).request, headers: ["Authorization" : "Bearer \(Gmail.bearerToken)"], requestBody: nil)
         }
+        
+        static func send(userID: String, headers: [String : String], requestBody: [String : Any], type: API.resourceContentType) -> Data? {
+            var headersWithAuth = headers
+            headersWithAuth["Authorization"] = "Bearer \(Gmail.bearerToken)"
+            return API.executeRequest(APIRequest: API.usersDrafts.send(userId: userID, type: type).request, headers: headersWithAuth, requestBody: requestBody)
+        }
     }
     
 }
