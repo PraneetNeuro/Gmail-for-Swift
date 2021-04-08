@@ -30,6 +30,9 @@ class Gmail {
             return API.executeRequest(APIRequest: API.usersDrafts.create(userId: userID, type: type).request, headers: ["Authorization" : "Bearer "], requestBody: requestBody)
         }
         
+        static func delete(userID: String, id: String) -> Data? {
+            return API.executeRequest(APIRequest: API.usersDrafts.delete(userId: userID, id: id).request, headers: ["Authorization" : "Bearer "], requestBody: nil)
+        }
     }
     
 }
