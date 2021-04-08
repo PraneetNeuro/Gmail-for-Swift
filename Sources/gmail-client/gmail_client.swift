@@ -5,7 +5,7 @@ class Gmail {
     static var bearerToken: String = ""
     static var defaultHeadersWithAuth = ["Authorization" : "Bearer \(Gmail.bearerToken)"]
     
-    func setAuth(bearerToken: String) {
+    static func setAuth(bearerToken: String) {
         Gmail.bearerToken = bearerToken
     }
     
@@ -56,15 +56,31 @@ class Gmail {
     }
     
     class UsersHistory {
+        
         static func list(userID: String, startHistoryId: String) -> Data? {
             return API.executeRequest(APIRequest: API.usersHistory.list(userID: userID, startHistoryId: startHistoryId).request, headers: defaultHeadersWithAuth, requestBody: nil)
         }
+        
     }
     
     class UsersLabels {
+        
         static func create(userID: String, requestBody: [String : Any]) -> Data? {
             return API.executeRequest(APIRequest: API.usersLabels.create(userId: userID).request, headers: defaultHeadersWithAuth, requestBody: requestBody)
         }
+        
+        static func delete(userID: String, id: String) -> Data? {
+            return API.executeRequest(APIRequest: API.usersLabels.delete(userId: userID, id: id).request, headers: defaultHeadersWithAuth, requestBody: nil)
+        }
+        
+        static func get(userID: String, id: String) -> Data? {
+            return API.executeRequest(APIRequest: API.usersLabels.get(userId: userID, id: id).request, headers: defaultHeadersWithAuth, requestBody: nil)
+        }
+        
+        static func list(userID: String) -> Data? {
+            return API.executeRequest(APIRequest: API.usersLabels.list(userId: userID).request, headers: defaultHeadersWithAuth, requestBody: nil)
+        }
+        
     }
     
 }
