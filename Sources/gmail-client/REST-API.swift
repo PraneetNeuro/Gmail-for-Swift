@@ -121,12 +121,12 @@ class API {
     }
     
     enum usersHistory {
-        case list(userID: String)
+        case list(userID: String, startHistoryId: String)
         
         var request: Request {
             switch self {
-            case .list(userID: let userID):
-                return Request(requestURL: "/gmail/v1/users/\(userID)/history", requestMethod: .GET)
+            case .list(userID: let userID, startHistoryId: let startHistoryId):
+                return Request(requestURL: "/gmail/v1/users/\(userID)/history?startHistoryId=\(startHistoryId)", requestMethod: .GET)
             }
         }
     }
