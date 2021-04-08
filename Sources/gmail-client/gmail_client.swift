@@ -47,6 +47,11 @@ class Gmail {
             headersWithAuth["Authorization"] = "Bearer \(Gmail.bearerToken)"
             return API.executeRequest(APIRequest: API.usersDrafts.send(userId: userID, type: type).request, headers: headersWithAuth, requestBody: requestBody)
         }
+        
+        static func update(userID: String, requestBody: [String : Any], id: String, type: API.resourceContentType) -> Data? {
+            return API.executeRequest(APIRequest: API.usersDrafts.update(userId: userID, id: id, type: type).request, headers: ["Authorization" : "Bearer \(Gmail.bearerToken)"], requestBody: requestBody)
+        }
+        
     }
     
 }
