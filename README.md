@@ -1,3 +1,4 @@
-# gmail-client
+# Gmail for Swift
 
-A description of this package.
+Google hasn't included Swift in their list of platforms supported, hence, Gmail-for-Swift! 
+
