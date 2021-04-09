@@ -81,6 +81,14 @@ class Gmail {
             return UsersLabels.decodeToLabelList(data: API.executeRequest(APIRequest: API.usersLabels.list(userId: userID).request, headers: defaultHeadersWithAuth, requestBody: nil))
         }
         
+        static func patch(userID: String, id: String, requestBody: Label) -> Label? {
+            return UsersLabels.decodeToLabel(data: API.executeRequest(APIRequest: API.usersLabels.patch(userId: userID, id: id).request, headers: defaultHeadersWithAuth, requestBody: requestBody.dictionary))
+        }
+        
+        static func update(userID: String, id: String, requestBody: Label) -> Label? {
+            return UsersLabels.decodeToLabel(data: API.executeRequest(APIRequest: API.usersLabels.update(userId: userID, id: id).request, headers: defaultHeadersWithAuth, requestBody: requestBody.dictionary))
+        }
+        
     }
     
     class UsersMessages {
