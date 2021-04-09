@@ -19,3 +19,8 @@ struct ThreadList : Codable {
     let nextPageToken: String
     let resultSizeEstimate: Int
 }
+
+struct ThreadModifyBody : Codable {
+      let addLabelIds: [String]
+      let removeLabelIds: [String]
+}

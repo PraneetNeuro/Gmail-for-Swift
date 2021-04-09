@@ -109,6 +109,18 @@ class Gmail {
             return UsersThreads.decodeToThread(data: API.executeRequest(APIRequest: API.usersThreads.trash(userID: userID, id: id).request, headers: defaultHeadersWithAuth, requestBody: nil))
         }
         
+        static func untrash(userID: String, id: String) -> Thread? {
+            return UsersThreads.decodeToThread(data: API.executeRequest(APIRequest: API.usersThreads.untrash(userID: userID, id: id).request, headers: defaultHeadersWithAuth, requestBody: nil))
+        }
+        
+        static func delete(userID: String, id: String) -> Data? {
+            return API.executeRequest(APIRequest: API.usersThreads.delete(userID: userID, id: id).request, headers: defaultHeadersWithAuth, requestBody: nil)
+        }
+        
+        static func modify(userID: String, id: String, requestBody: ThreadModifyBody) -> Thread? {
+            return UsersThreads.decodeToThread(data: API.executeRequest(APIRequest: API.usersThreads.untrash(userID: userID, id: id).request, headers: defaultHeadersWithAuth, requestBody: requestBody.dictionary))
+        }
+        
     }
     
 }
