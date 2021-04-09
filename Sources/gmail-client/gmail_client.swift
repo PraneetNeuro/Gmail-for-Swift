@@ -27,8 +27,8 @@ class Gmail {
     
     class UsersDrafts {
         
-        static func create(userID: String, type: API.resourceContentType, draft: Draft) -> Data? {
-            return API.executeRequest(APIRequest: API.usersDrafts.create(userId: userID, type: type).request, headers: defaultHeadersWithAuth, requestBody: draft.dictionary)
+        static func create(userID: String, type: API.resourceContentType, draft: [String : Any]) -> Data? {
+            return API.executeRequest(APIRequest: API.usersDrafts.create(userId: userID, type: type).request, headers: defaultHeadersWithAuth, requestBody: draft)
         }
         
         static func delete(userID: String, id: String) -> Data? {
@@ -43,14 +43,14 @@ class Gmail {
             return API.executeRequest(APIRequest: API.usersDrafts.list(userId: userID).request, headers: defaultHeadersWithAuth, requestBody: nil)
         }
         
-        static func send(userID: String, headers: [String : String], draft: Draft, type: API.resourceContentType) -> Data? {
+        static func send(userID: String, headers: [String : String], draft: [String : Any], type: API.resourceContentType) -> Data? {
             var headersWithAuth = headers
             headersWithAuth["Authorization"] = "Bearer \(Gmail.bearerToken)"
-            return API.executeRequest(APIRequest: API.usersDrafts.send(userId: userID, type: type).request, headers: headersWithAuth, requestBody: draft.dictionary)
+            return API.executeRequest(APIRequest: API.usersDrafts.send(userId: userID, type: type).request, headers: headersWithAuth, requestBody: draft)
         }
         
-        static func update(userID: String, draft: Draft, id: String, type: API.resourceContentType) -> Data? {
-            return API.executeRequest(APIRequest: API.usersDrafts.update(userId: userID, id: id, type: type).request, headers: defaultHeadersWithAuth, requestBody: draft.dictionary)
+        static func update(userID: String, draft: [String : Any], id: String, type: API.resourceContentType) -> Data? {
+            return API.executeRequest(APIRequest: API.usersDrafts.update(userId: userID, id: id, type: type).request, headers: defaultHeadersWithAuth, requestBody: draft)
         }
         
     }
