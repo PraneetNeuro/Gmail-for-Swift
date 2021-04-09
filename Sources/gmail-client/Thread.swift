@@ -13,3 +13,9 @@ struct Thread : Codable {
     let historyId: String?
     let messages: [Message]?
 }
+
+struct ThreadList : Codable {
+    let threads: [Thread]
+    let nextPageToken: String
+    let resultSizeEstimate: Int
+}
