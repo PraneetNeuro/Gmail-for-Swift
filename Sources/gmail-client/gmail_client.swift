@@ -93,6 +93,10 @@ class Gmail {
     
     class UsersMessages {
         
+        static func batchDelete(userID: String, ids: [String]) -> Data? {
+            return API.executeRequest(APIRequest: API.usersMessages.batchDelete(userID: userID).request, headers: defaultHeadersWithAuth, requestBody: ["ids":ids])
+        }
+        
         static func list(userID: String) -> MessagesList? {
             return UsersMessages.decodeToMessageList(data: API.executeRequest(APIRequest: API.usersMessages.list(userID: userID).request, headers: defaultHeadersWithAuth, requestBody: nil))
         }
