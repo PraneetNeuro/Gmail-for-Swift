@@ -105,6 +105,10 @@ class Gmail {
             return UsersThreads.decodeToThreadList(data: API.executeRequest(APIRequest: API.usersThreads.list(userID: userID).request, headers: defaultHeadersWithAuth, requestBody: nil))
         }
         
+        static func trash(userID: String, id: String) -> Thread? {
+            return UsersThreads.decodeToThread(data: API.executeRequest(APIRequest: API.usersThreads.trash(userID: userID, id: id).request, headers: defaultHeadersWithAuth, requestBody: nil))
+        }
+        
     }
     
 }
