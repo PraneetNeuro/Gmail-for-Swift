@@ -49,3 +49,14 @@ struct MessageListInstance : Codable {
     let id: String?
     let threadId: String?
 }
+
+struct UserMessagesBatchModifyBody : Codable {
+      let ids: [String]?
+      let addLabelIds: [String]?
+      let removeLabelIds: [String]?
+}
+
+struct ModifiedMessageBody : Codable {
+      let addLabelIds: [String]?
+      let removeLabelIds: [String]?
+}
