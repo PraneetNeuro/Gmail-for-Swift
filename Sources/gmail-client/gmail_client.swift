@@ -65,8 +65,8 @@ class Gmail {
     
     class UsersLabels {
         
-        static func create(userID: String, requestBody: [String : Any]) -> Data? {
-            return API.executeRequest(APIRequest: API.usersLabels.create(userId: userID).request, headers: defaultHeadersWithAuth, requestBody: requestBody)
+        static func create(userID: String, requestBody: Label) -> Label? {
+            return UsersLabels.decodeToLabel(data: API.executeRequest(APIRequest: API.usersLabels.create(userId: userID).request, headers: defaultHeadersWithAuth, requestBody: requestBody.dictionary))
         }
         
         static func delete(userID: String, id: String) -> Data? {
