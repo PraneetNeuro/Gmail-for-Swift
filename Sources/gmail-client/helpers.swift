@@ -56,7 +56,7 @@ extension Gmail.UsersThreads {
         }
     }
     
-    static func decodeToThreadList(data: Data?) -> Thread? {
+    static func decodeToThreadList(data: Data?) -> ThreadList? {
         guard data != nil else { return nil }
         let decoder = JSONDecoder()
         do {
