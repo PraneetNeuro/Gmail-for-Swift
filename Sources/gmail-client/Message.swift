@@ -7,18 +7,18 @@
 
 import Foundation
 
-struct Header {
+struct Header : Codable {
     let name: String
     let value: String
 }
 
-struct MessagePartBody {
+struct MessagePartBody : Codable {
     let attachmentId: String
     let size: Int
     let data: String
 }
 
-struct MessagePart {
+struct MessagePart : Codable {
     let partId: String
     let mimeType: String
     let filename: String
@@ -27,7 +27,7 @@ struct MessagePart {
     let parts: [MessagePart]
 }
 
-struct Message {
+struct Message : Codable {
     let id: String
     let threadId: String
     let labelIds: [String]
