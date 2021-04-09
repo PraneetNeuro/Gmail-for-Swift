@@ -8,6 +8,6 @@
 import Foundation
 
 struct Draft : Codable {
-    let id: String
-    let message: Message
+    let id: String?
+    let message: Message?
 }
