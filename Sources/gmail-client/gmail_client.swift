@@ -73,12 +73,12 @@ class Gmail {
             return API.executeRequest(APIRequest: API.usersLabels.delete(userId: userID, id: id).request, headers: defaultHeadersWithAuth, requestBody: nil)
         }
         
-        static func get(userID: String, id: String) -> Data? {
-            return API.executeRequest(APIRequest: API.usersLabels.get(userId: userID, id: id).request, headers: defaultHeadersWithAuth, requestBody: nil)
+        static func get(userID: String, id: String) -> Label? {
+            return UsersLabels.decodeToLabel(data: API.executeRequest(APIRequest: API.usersLabels.get(userId: userID, id: id).request, headers: defaultHeadersWithAuth, requestBody: nil))
         }
         
-        static func list(userID: String) -> Data? {
-            return API.executeRequest(APIRequest: API.usersLabels.list(userId: userID).request, headers: defaultHeadersWithAuth, requestBody: nil)
+        static func list(userID: String) -> LabelList? {
+            return UsersLabels.decodeToLabelList(data: API.executeRequest(APIRequest: API.usersLabels.list(userId: userID).request, headers: defaultHeadersWithAuth, requestBody: nil))
         }
         
     }

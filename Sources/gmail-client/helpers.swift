@@ -68,5 +68,32 @@ extension Gmail.UsersThreads {
         }
     }
 
+}
+
+extension Gmail.UsersLabels {
+    
+    static func decodeToLabel(data: Data?) -> Label? {
+        guard data != nil else { return nil }
+        let decoder = JSONDecoder()
+        do {
+            let resp = try decoder.decode(Label.self, from: data!)
+            return resp
+        } catch {
+            print(error.localizedDescription)
+            return nil
+        }
+    }
+    
+    static func decodeToLabelList(data: Data?) -> LabelList? {
+        guard data != nil else { return nil }
+        let decoder = JSONDecoder()
+        do {
+            let resp = try decoder.decode(LabelList.self, from: data!)
+            return resp
+        } catch {
+            print(error.localizedDescription)
+            return nil
+        }
+    }
     
 }
