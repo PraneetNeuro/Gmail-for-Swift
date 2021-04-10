@@ -2,8 +2,8 @@ import Foundation
 
 class Gmail {
     
-    static var bearerToken: String = ""
-    static var defaultHeadersWithAuth = ["Authorization" : "Bearer \(Gmail.bearerToken)"]
+    private static var bearerToken: String = ""
+    private static var defaultHeadersWithAuth = ["Authorization" : "Bearer \(Gmail.bearerToken)"]
     
     static func setAuth(bearerToken: String) {
         Gmail.bearerToken = bearerToken
