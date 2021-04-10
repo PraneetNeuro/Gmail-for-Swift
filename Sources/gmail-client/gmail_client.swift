@@ -65,8 +65,8 @@ class Gmail {
     
     class UsersLabels {
         
-        static func create(userID: String, requestBody: [String : Any]) -> Data? {
-            return API.executeRequest(APIRequest: API.usersLabels.create(userId: userID).request, headers: defaultHeadersWithAuth, requestBody: requestBody)
+        static func create(userID: String, requestBody: Label) -> Label? {
+            return UsersLabels.decodeToLabel(data: API.executeRequest(APIRequest: API.usersLabels.create(userId: userID).request, headers: defaultHeadersWithAuth, requestBody: requestBody.dictionary))
         }
         
         static func delete(userID: String, id: String) -> Data? {
@@ -81,9 +81,53 @@ class Gmail {
             return UsersLabels.decodeToLabelList(data: API.executeRequest(APIRequest: API.usersLabels.list(userId: userID).request, headers: defaultHeadersWithAuth, requestBody: nil))
         }
         
+        static func patch(userID: String, id: String, requestBody: Label) -> Label? {
+            return UsersLabels.decodeToLabel(data: API.executeRequest(APIRequest: API.usersLabels.patch(userId: userID, id: id).request, headers: defaultHeadersWithAuth, requestBody: requestBody.dictionary))
+        }
+        
+        static func update(userID: String, id: String, requestBody: Label) -> Label? {
+            return UsersLabels.decodeToLabel(data: API.executeRequest(APIRequest: API.usersLabels.update(userId: userID, id: id).request, headers: defaultHeadersWithAuth, requestBody: requestBody.dictionary))
+        }
+        
     }
     
     class UsersMessages {
+        
+        static func batchDelete(userID: String, ids: [String]) -> Data? {
+            return API.executeRequest(APIRequest: API.usersMessages.batchDelete(userID: userID).request, headers: defaultHeadersWithAuth, requestBody: ["ids":ids])
+        }
+        
+        static func batchModify(userID: String, requestBody: UserMessagesBatchModifyBody) -> Data? {
+            return API.executeRequest(APIRequest: API.usersMessages.batchModify(userID: userID).request, headers: defaultHeadersWithAuth, requestBody: requestBody.dictionary)
+        }
+        
+        static func delete(userID: String, id: String) -> Data? {
+            return API.executeRequest(APIRequest: API.usersMessages.delete(userID: userID, id: id).request, headers: defaultHeadersWithAuth, requestBody: nil)
+        }
+        
+        static func importMessage(userID: String, type: API.resourceContentType, message: Message) -> Message? {
+            return UsersMessages.decodeToMessage(data: API.executeRequest(APIRequest: API.usersMessages.importMessages(userID: userID, importType: type).request, headers: defaultHeadersWithAuth, requestBody: message.dictionary))
+        }
+        
+        static func insert(userID: String, type: API.resourceContentType, message: Message) -> Message? {
+            return UsersMessages.decodeToMessage(data: API.executeRequest(APIRequest: API.usersMessages.insert(userID: userID, importType: type).request, headers: defaultHeadersWithAuth, requestBody: message.dictionary))
+        }
+        
+        static func modify(userID: String, id: String, modifiedMessageBody: ModifiedMessageBody) -> Message? {
+            return UsersMessages.decodeToMessage(data: API.executeRequest(APIRequest: API.usersMessages.modify(userID: userID, id: id).request, headers: defaultHeadersWithAuth, requestBody: modifiedMessageBody.dictionary))
+        }
+        
+        static func send(userID: String, type: API.resourceContentType, message: Message) -> Message? {
+            return UsersMessages.decodeToMessage(data: API.executeRequest(APIRequest: API.usersMessages.send(userID: userID, importType: type).request, headers: defaultHeadersWithAuth, requestBody: message.dictionary))
+        }
+        
+        static func trash(userID: String, id: String) -> Message? {
+            return UsersMessages.decodeToMessage(data: API.executeRequest(APIRequest: API.usersMessages.trash(userID: userID, id: id).request, headers: defaultHeadersWithAuth, requestBody: nil))
+        }
+        
+        static func untrash(userID: String, id: String) -> Message? {
+            return UsersMessages.decodeToMessage(data: API.executeRequest(APIRequest: API.usersMessages.untrash(userID: userID, id: id).request, headers: defaultHeadersWithAuth, requestBody: nil))
+        }
         
         static func list(userID: String) -> MessagesList? {
             return UsersMessages.decodeToMessageList(data: API.executeRequest(APIRequest: API.usersMessages.list(userID: userID).request, headers: defaultHeadersWithAuth, requestBody: nil))

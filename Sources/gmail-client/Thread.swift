@@ -15,12 +15,12 @@ struct Thread : Codable {
 }
 
 struct ThreadList : Codable {
-    let threads: [Thread]
-    let nextPageToken: String
-    let resultSizeEstimate: Int
+    let threads: [Thread]?
+    let nextPageToken: String?
+    let resultSizeEstimate: Int?
 }
 
 struct ThreadModifyBody : Codable {
-      let addLabelIds: [String]
-      let removeLabelIds: [String]
+      let addLabelIds: [String]?
+      let removeLabelIds: [String]?
 }
