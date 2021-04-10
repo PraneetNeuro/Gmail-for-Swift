@@ -97,3 +97,54 @@ extension Gmail.UsersLabels {
     }
     
 }
+
+extension Gmail.UsersSettings {
+    
+    static func decodeToAutoForwarding(data: Data?) -> AutoForwarding? {
+        guard data != nil else { return nil }
+        let decoder = JSONDecoder()
+        do {
+            let resp = try decoder.decode(AutoForwarding.self, from: data!)
+            return resp
+        } catch {
+            print(error.localizedDescription)
+            return nil
+        }
+    }
+    
+    static func decodeToImapSetttings(data: Data?) -> ImapSettings? {
+        guard data != nil else { return nil }
+        let decoder = JSONDecoder()
+        do {
+            let resp = try decoder.decode(ImapSettings.self, from: data!)
+            return resp
+        } catch {
+            print(error.localizedDescription)
+            return nil
+        }
+    }
+    
+    static func decodeToLanguageSettings(data: Data?) -> LanguageSettings? {
+        guard data != nil else { return nil }
+        let decoder = JSONDecoder()
+        do {
+            let resp = try decoder.decode(LanguageSettings.self, from: data!)
+            return resp
+        } catch {
+            print(error.localizedDescription)
+            return nil
+        }
+    }
+    
+    static func decodeToPopSettings(data: Data?) -> PopSettings? {
+        guard data != nil else { return nil }
+        let decoder = JSONDecoder()
+        do {
+            let resp = try decoder.decode(PopSettings.self, from: data!)
+            return resp
+        } catch {
+            print(error.localizedDescription)
+            return nil
+        }
+    }
+}

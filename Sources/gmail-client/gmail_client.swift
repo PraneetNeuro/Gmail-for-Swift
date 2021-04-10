@@ -167,4 +167,22 @@ class Gmail {
         
     }
     
+    class UsersSettings {
+        
+        static func getAutoForwarding(userID: String, id: String) -> AutoForwarding? {
+            return UsersSettings.decodeToAutoForwarding(data: API.executeRequest(APIRequest: API.usersSettings.getAutoForwarding(userID: userID).request, headers: defaultHeadersWithAuth, requestBody: nil))
+        }
+        
+        static func getImap(userID: String) -> ImapSettings? {
+            return UsersSettings.decodeToImapSetttings(data: API.executeRequest(APIRequest: API.usersSettings.getImap(userID: userID).request, headers: defaultHeadersWithAuth, requestBody: nil))
+        }
+        
+        static func getLanguage(userID: String) -> LanguageSettings? {
+            return UsersSettings.decodeToLanguageSettings(data: API.executeRequest(APIRequest: API.usersSettings.getLanguage(userID: userID).request, headers: defaultHeadersWithAuth, requestBody: nil))
+        }
+        
+        static func getPop(userID: String) -> PopSettings? {
+            return UsersSettings.decodeToPopSettings(data: API.executeRequest(APIRequest: API.usersSettings.getPop(userID: userID).request, headers: defaultHeadersWithAuth, requestBody: nil))
+        }
+    }
 }
