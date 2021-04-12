@@ -12,7 +12,7 @@ public class Smail : ObservableObject {
     var cancellables: Set<AnyCancellable> = []
     
     
-    init(authToken: String, mailID: String, refreshInterval: Int?) {
+    public init(authToken: String, mailID: String, refreshInterval: Int?) {
         Gmail.setAuth(bearerToken: authToken)
         self.mailID = mailID
         self.refreshInterval = refreshInterval ?? -1
