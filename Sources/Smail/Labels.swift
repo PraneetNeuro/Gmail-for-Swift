@@ -7,12 +7,12 @@
 
 import Foundation
 
-struct Color : Codable {
+public struct Color : Codable {
     let textColor: String?
     let backgroundColor: String?
 }
 
-struct Label : Codable {
+public struct Label : Codable {
       let id: String?
       let name: String?
       let messageListVisibility: MessageListVisibility?
@@ -41,7 +41,7 @@ struct Label : Codable {
     }
 }
 
-struct LabelList : Codable {
+public struct LabelList : Codable {
     let labels: [Label]?
 }
 
