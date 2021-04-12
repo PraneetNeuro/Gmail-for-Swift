@@ -1,7 +1,7 @@
 import Foundation
 import Combine
 
-class Gmail {
+public class Gmail {
     
     private static var bearerToken: String = ""
     private static var defaultHeadersWithAuth = ["Authorization" : "Bearer \(Gmail.bearerToken)"]
