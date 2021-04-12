@@ -7,13 +7,13 @@
 
 import Foundation
 
-struct AutoForwarding : Codable {
+public struct AutoForwarding : Codable {
     public let enabled: Bool
     public let emailAddress: String
     public let disposition: Disposition
 }
 
-struct ImapSettings : Codable {
+public struct ImapSettings : Codable {
     public let enabled: Bool
     public let autoExpunge: Bool
     public let expungeBehavior: ExpungeBehavior
@@ -27,11 +27,11 @@ struct ImapSettings : Codable {
     }
 }
 
-struct LanguageSettings: Codable {
+public struct LanguageSettings: Codable {
     public let displayLanguage: String
 }
 
-struct PopSettings: Codable {
+public struct PopSettings: Codable {
     public let accessWindow: AccessWindow
     public let disposition: Disposition
     
@@ -43,7 +43,7 @@ struct PopSettings: Codable {
     }
 }
 
-enum Disposition : String, Codable {
+public enum Disposition : String, Codable {
     case DISPOSITION_UNSPECIFIED
     case LEAVE_IN_INBOX
     case ARCHIVE
