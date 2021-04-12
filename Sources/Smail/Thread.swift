@@ -7,20 +7,20 @@
 
 import Foundation
 
-public struct Thread : Codable {
-    let id: String?
-    let snippet: String?
-    let historyId: String?
-    let messages: [Message]?
+struct Thread : Codable {
+    public let id: String?
+    public let snippet: String?
+    public let historyId: String?
+    public let messages: [Message]?
 }
 
-public struct ThreadList : Codable {
-    let threads: [Thread]?
-    let nextPageToken: String?
-    let resultSizeEstimate: Int?
+struct ThreadList : Codable {
+    public let threads: [Thread]?
+    public let nextPageToken: String?
+    public let resultSizeEstimate: Int?
 }
 
-public struct ThreadModifyBody : Codable {
-      let addLabelIds: [String]?
-      let removeLabelIds: [String]?
+struct ThreadModifyBody : Codable {
+    public let addLabelIds: [String]?
+    public let removeLabelIds: [String]?
 }

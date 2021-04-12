@@ -26,25 +26,25 @@ public class API {
     public static var baseURL = "https://gmail.googleapis.com"
     
     public static func executeRequest(APIRequest: Request, headers: [String : String]?, requestBody: [String : Any]?) -> AnyPublisher<Data, URLError> {
-        
-        let apiRequestURL = URL(string: API.baseURL + APIRequest.requestURL)
-        if apiRequestURL == nil {
-            return Fail(error: URLError(.badURL)).eraseToAnyPublisher()
-        }
-        
-        var request = URLRequest(url: apiRequestURL!)
-        request.httpMethod = APIRequest.requestMethod.rawValue
-        if let requestBody = requestBody {
-            let jsonData = try? JSONSerialization.data(withJSONObject: requestBody)
-            request.httpBody = jsonData
-        }
-        request.allHTTPHeaderFields = headers
-        
-        let publisher = URLSession.shared.dataTaskPublisher(for: request)
-            .map { $0.data }
-            .eraseToAnyPublisher()
-        
-        return publisher
+
+            let apiRequestURL = URL(string: API.baseURL + APIRequest.requestURL)
+            if apiRequestURL == nil {
+                return Fail(error: URLError(.badURL)).eraseToAnyPublisher()
+            }
+            
+            var request = URLRequest(url: apiRequestURL!)
+            request.httpMethod = APIRequest.requestMethod.rawValue
+            if let requestBody = requestBody {
+                let jsonData = try? JSONSerialization.data(withJSONObject: requestBody)
+                request.httpBody = jsonData
+            }
+            request.allHTTPHeaderFields = headers
+            
+            let publisher = URLSession.shared.dataTaskPublisher(for: request)
+                .map { $0.data }
+                .eraseToAnyPublisher()
+            
+            return publisher
     }
     
     public enum resourceContentType {

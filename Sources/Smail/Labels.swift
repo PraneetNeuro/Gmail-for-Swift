@@ -7,22 +7,22 @@
 
 import Foundation
 
-public struct Color : Codable {
-    let textColor: String?
-    let backgroundColor: String?
+struct Color : Codable {
+    public let textColor: String?
+    public let backgroundColor: String?
 }
 
-public struct Label : Codable {
-      let id: String?
-      let name: String?
-      let messageListVisibility: MessageListVisibility?
-      let labelListVisibility: LabelListVisibility?
-      let type: Type_?
-      let messagesTotal: Int?
-      let messagesUnread: Int?
-      let threadsTotal: Int?
-      let threadsUnread: Int?
-      let color: Color?
+struct Label : Codable {
+      public let id: String?
+      public let name: String?
+      public let messageListVisibility: MessageListVisibility?
+      public let labelListVisibility: LabelListVisibility?
+      public let type: Type_?
+      public let messagesTotal: Int?
+      public let messagesUnread: Int?
+      public let threadsTotal: Int?
+      public let threadsUnread: Int?
+      public let color: Color?
     
     enum MessageListVisibility : String, Codable {
         case SHOW
@@ -41,7 +41,7 @@ public struct Label : Codable {
     }
 }
 
-public struct LabelList : Codable {
-    let labels: [Label]?
+struct LabelList : Codable {
+    public let labels: [Label]?
 }
 

@@ -7,17 +7,17 @@
 
 import Foundation
 
-public struct AutoForwarding : Codable {
-    let enabled: Bool
-    let emailAddress: String
-    let disposition: Disposition
+struct AutoForwarding : Codable {
+    public let enabled: Bool
+    public let emailAddress: String
+    public let disposition: Disposition
 }
 
-public struct ImapSettings : Codable {
-    let enabled: Bool
-    let autoExpunge: Bool
-    let expungeBehavior: ExpungeBehavior
-    let maxFolderSize: Int
+struct ImapSettings : Codable {
+    public let enabled: Bool
+    public let autoExpunge: Bool
+    public let expungeBehavior: ExpungeBehavior
+    public let maxFolderSize: Int
     
     enum ExpungeBehavior : String, Codable {
         case EXPUNGE_BEHAVIOR_UNSPECIFIED
@@ -27,13 +27,13 @@ public struct ImapSettings : Codable {
     }
 }
 
-public struct LanguageSettings: Codable {
-    let displayLanguage: String
+struct LanguageSettings: Codable {
+    public let displayLanguage: String
 }
 
-public struct PopSettings: Codable {
-    let accessWindow: AccessWindow
-    let disposition: Disposition
+struct PopSettings: Codable {
+    public let accessWindow: AccessWindow
+    public let disposition: Disposition
     
     enum AccessWindow: String, Codable {
         case ACCESS_WINDOW_UNSPECIFIED
@@ -43,7 +43,7 @@ public struct PopSettings: Codable {
     }
 }
 
-public enum Disposition : String, Codable {
+enum Disposition : String, Codable {
     case DISPOSITION_UNSPECIFIED
     case LEAVE_IN_INBOX
     case ARCHIVE
