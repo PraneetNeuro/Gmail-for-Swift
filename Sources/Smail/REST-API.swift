@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-enum HTTPMethod: String {
+public enum HTTPMethod: String {
     case GET
     case PUT
     case POST
@@ -16,43 +16,43 @@ enum HTTPMethod: String {
     case DELETE
 }
 
-class API {
+public class API {
     
-    struct Request {
+    public struct Request {
         let requestURL: String
         let requestMethod: HTTPMethod
     }
     
-    static var baseURL = "https://gmail.googleapis.com"
+    public static var baseURL = "https://gmail.googleapis.com"
     
-    static func executeRequest(APIRequest: Request, headers: [String : String]?, requestBody: [String : Any]?) -> AnyPublisher<Data, URLError> {
-
-            let apiRequestURL = URL(string: API.baseURL + APIRequest.requestURL)
-            if apiRequestURL == nil {
-                return Fail(error: URLError(.badURL)).eraseToAnyPublisher()
-            }
-            
-            var request = URLRequest(url: apiRequestURL!)
-            request.httpMethod = APIRequest.requestMethod.rawValue
-            if let requestBody = requestBody {
-                let jsonData = try? JSONSerialization.data(withJSONObject: requestBody)
-                request.httpBody = jsonData
-            }
-            request.allHTTPHeaderFields = headers
-            
-            let publisher = URLSession.shared.dataTaskPublisher(for: request)
-                .map { $0.data }
-                .eraseToAnyPublisher()
-            
-            return publisher
+    public static func executeRequest(APIRequest: Request, headers: [String : String]?, requestBody: [String : Any]?) -> AnyPublisher<Data, URLError> {
+        
+        let apiRequestURL = URL(string: API.baseURL + APIRequest.requestURL)
+        if apiRequestURL == nil {
+            return Fail(error: URLError(.badURL)).eraseToAnyPublisher()
+        }
+        
+        var request = URLRequest(url: apiRequestURL!)
+        request.httpMethod = APIRequest.requestMethod.rawValue
+        if let requestBody = requestBody {
+            let jsonData = try? JSONSerialization.data(withJSONObject: requestBody)
+            request.httpBody = jsonData
+        }
+        request.allHTTPHeaderFields = headers
+        
+        let publisher = URLSession.shared.dataTaskPublisher(for: request)
+            .map { $0.data }
+            .eraseToAnyPublisher()
+        
+        return publisher
     }
     
-    enum resourceContentType {
+    public enum resourceContentType {
         case Media
         case Metadata
     }
     
-    enum user {
+    public enum user {
         case getProfile(userID: String)
         case stop(userID: String)
         case watch(userID: String)
@@ -69,7 +69,7 @@ class API {
         }
     }
     
-    enum usersDrafts {
+    public enum usersDrafts {
         case create(userId: String, type: resourceContentType)
         case delete(userId: String, id: String)
         case get(userId: String, id: String)
@@ -110,7 +110,7 @@ class API {
         }
     }
     
-    enum usersHistory {
+    public enum usersHistory {
         case list(userID: String, startHistoryId: String)
         
         var request: Request {
@@ -121,7 +121,7 @@ class API {
         }
     }
     
-    enum usersLabels {
+    public enum usersLabels {
         case create(userId: String)
         case delete(userId: String, id: String)
         case get(userId: String, id: String)
@@ -147,7 +147,7 @@ class API {
         }
     }
     
-    enum usersMessages {
+    public enum usersMessages {
         case batchDelete(userID: String)
         case batchModify(userID: String)
         case delete(userID: String, id: String)
@@ -203,7 +203,7 @@ class API {
         }
     }
     
-    enum messageAttachments {
+    public enum messageAttachments {
         case get(userID: String, messageID: String, id: String)
         
         var request: String {
@@ -214,7 +214,7 @@ class API {
         }
     }
     
-    enum usersSettings {
+    public enum usersSettings {
         case getAutoForwarding(userID: String)
         case getImap(userID: String)
         case getLanguage(userID: String)
@@ -252,7 +252,7 @@ class API {
         }
     }
     
-    enum usersSettingsDelegates {
+    public enum usersSettingsDelegates {
         case create(userID: String)
         case delete(userID: String, delegateEmail: String)
         case get(userID: String, delegateEmail: String)
@@ -272,7 +272,7 @@ class API {
         }
     }
     
-    enum usersSettingsFilters {
+    public enum usersSettingsFilters {
         case create(userID: String)
         case delete(userID: String, id: String)
         case get(userID: String, id: String)
@@ -292,7 +292,7 @@ class API {
         }
     }
     
-    enum usersSettingsForwardingAddresses {
+    public enum usersSettingsForwardingAddresses {
         case create(userID: String)
         case delete(userID: String, forwardingEmail: String)
         case get(userID: String, forwardingEmail: String)
@@ -312,7 +312,7 @@ class API {
         }
     }
     
-    enum usersSettingsSendAs {
+    public enum usersSettingsSendAs {
         case create(userID: String)
         case delete(userID: String, sendAsEmail: String)
         case get(userID: String, sendAsEmail: String)
@@ -341,7 +341,7 @@ class API {
         }
     }
     
-    enum usersSettingsSendAsSmimeInfo {
+    public enum usersSettingsSendAsSmimeInfo {
         case delete(userID: String, sendAsEmail: String, id: String)
         case get(userID: String, sendAsEmail: String, id: String)
         case insert(userID: String, sendAsEmail: String)
@@ -364,7 +364,7 @@ class API {
         }
     }
     
-    enum usersThreads {
+    public enum usersThreads {
         case delete(userID: String, id: String)
         case get(userID: String, id: String)
         case list(userID: String)
