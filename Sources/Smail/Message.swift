@@ -7,18 +7,18 @@
 
 import Foundation
 
-struct Header : Codable {
+public struct Header : Codable {
     let name: String?
     let value: String?
 }
 
-struct MessagePartBody : Codable {
+public struct MessagePartBody : Codable {
     let attachmentId: String?
     let size: Int?
     let data: String?
 }
 
-struct MessagePart : Codable {
+public struct MessagePart : Codable {
     let partId: String?
     let mimeType: String?
     let filename: String?
@@ -27,7 +27,7 @@ struct MessagePart : Codable {
     let parts: [MessagePart]?
 }
 
-struct Message : Codable {
+public struct Message : Codable {
     let id: String?
     let threadId: String?
     let labelIds: [String]?
@@ -39,24 +39,24 @@ struct Message : Codable {
     let raw: String?
 }
 
-struct MessagesList : Codable {
+public struct MessagesList : Codable {
   let messages: [MessageListInstance]?
   let nextPageToken: String?
   let resultSizeEstimate: Int?
 }
 
-struct MessageListInstance : Codable {
+public struct MessageListInstance : Codable {
     let id: String?
     let threadId: String?
 }
 
-struct UserMessagesBatchModifyBody : Codable {
+public struct UserMessagesBatchModifyBody : Codable {
       let ids: [String]?
       let addLabelIds: [String]?
       let removeLabelIds: [String]?
 }
 
-struct ModifiedMessageBody : Codable {
+public struct ModifiedMessageBody : Codable {
       let addLabelIds: [String]?
       let removeLabelIds: [String]?
 }
