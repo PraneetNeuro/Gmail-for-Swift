@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Draft : Codable {
+public struct Draft : Codable {
     let id: String?
     let message: Message?
 }
