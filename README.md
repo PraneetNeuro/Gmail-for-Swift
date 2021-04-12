@@ -10,7 +10,7 @@ Google hasn't included Swift in their list of platforms supported, hence, Gmail-
 - [X] UsersLabels
 - [X] UsersMessages
 - [ ] UsersMessagesAttachments
-- [ ] UsersSettings
+- [X] UsersSettings
 - [ ] UsersSettingsDelegates
 - [ ] UsersSettingsFilters
 - [ ] UsersSettingsForwardingAddresses

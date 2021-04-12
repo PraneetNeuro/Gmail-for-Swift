@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 enum HTTPMethod: String {
     case GET
@@ -24,37 +25,26 @@ class API {
     
     static var baseURL = "https://gmail.googleapis.com"
     
-    static func executeRequest(APIRequest: Request, headers: [String : String]?, requestBody: [String : Any]?) -> Data? {
-        let apiRequestURL = URL(string: API.baseURL + APIRequest.requestURL)
-        guard apiRequestURL != nil else {
-            return nil
-        }
-        
-        let semaphore: DispatchSemaphore = DispatchSemaphore(value: 0)
-        
-        var request = URLRequest(url: apiRequestURL!)
-        request.httpMethod = APIRequest.requestMethod.rawValue
-        if let requestBody = requestBody {
-            let jsonData = try? JSONSerialization.data(withJSONObject: requestBody)
-            request.httpBody = jsonData
-        }
-        request.allHTTPHeaderFields = headers
+    static func executeRequest(APIRequest: Request, headers: [String : String]?, requestBody: [String : Any]?) -> AnyPublisher<Data, URLError> {
 
-        var responseData: Data?
-        
-        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
-            if let data = data {
-                responseData = data
-            } else {
-                responseData = error?.localizedDescription.data(using: .utf8)
+            let apiRequestURL = URL(string: API.baseURL + APIRequest.requestURL)
+            if apiRequestURL == nil {
+                return Fail(error: URLError(.badURL)).eraseToAnyPublisher()
             }
-            semaphore.signal()
-        }
-        task.resume()
-        
-        semaphore.wait()
-        
-        return responseData ?? "Unknown error".data(using: .utf8)!
+            
+            var request = URLRequest(url: apiRequestURL!)
+            request.httpMethod = APIRequest.requestMethod.rawValue
+            if let requestBody = requestBody {
+                let jsonData = try? JSONSerialization.data(withJSONObject: requestBody)
+                request.httpBody = jsonData
+            }
+            request.allHTTPHeaderFields = headers
+            
+            let publisher = URLSession.shared.dataTaskPublisher(for: request)
+                .map { $0.data }
+                .eraseToAnyPublisher()
+            
+            return publisher
     }
     
     enum resourceContentType {
