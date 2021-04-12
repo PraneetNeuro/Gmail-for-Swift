@@ -19,7 +19,7 @@ public struct ImapSettings : Codable {
     public let expungeBehavior: ExpungeBehavior
     public let maxFolderSize: Int
     
-    enum ExpungeBehavior : String, Codable {
+    public enum ExpungeBehavior : String, Codable {
         case EXPUNGE_BEHAVIOR_UNSPECIFIED
         case ARCHIVE
         case TRASH
@@ -35,7 +35,7 @@ public struct PopSettings: Codable {
     public let accessWindow: AccessWindow
     public let disposition: Disposition
     
-    enum AccessWindow: String, Codable {
+    public enum AccessWindow: String, Codable {
         case ACCESS_WINDOW_UNSPECIFIED
         case DISABLED
         case FROM_NOW_ON
