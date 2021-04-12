@@ -10,6 +10,7 @@ public class Smail : ObservableObject {
     @Published public var userMessages: MessagesList?
     @Published public var userThreads: ThreadList?
     @Published public var userLabels: LabelList?
+    @Published public var userDrafts: DraftList?
     
     var cancellables: Set<AnyCancellable> = []
     
@@ -37,6 +38,17 @@ public class Smail : ObservableObject {
                 print(completion)
             }, receiveValue: { labels in
                 self.userLabels = labels
+            })
+            .store(in: &cancellables)
+    }
+    
+    public func fetchUserDrafts() {
+        Gmail.UsersDrafts.list(userID: self.mailID)
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { completion in
+                print(completion)
+            }, receiveValue: { drafts in
+                self.userDrafts = drafts
             })
             .store(in: &cancellables)
     }

@@ -47,8 +47,8 @@ public class Gmail {
             return (API.executeRequest(APIRequest: API.usersDrafts.get(userId: userID, id: id).request, headers: defaultHeadersWithAuth, requestBody: nil))
         }
         
-        public static func list(userID: String) -> AnyPublisher<Data, URLError> {
-            return (API.executeRequest(APIRequest: API.usersDrafts.list(userId: userID).request, headers: defaultHeadersWithAuth, requestBody: nil))
+        public static func list(userID: String) -> AnyPublisher<DraftList, Error> {
+            return UsersDrafts.decodeToDraftList(publisher: API.executeRequest(APIRequest: API.usersDrafts.list(userId: userID).request, headers: defaultHeadersWithAuth, requestBody: nil))
         }
         
         public static func send(userID: String, headers: [String : String], draft: [String : Any], type: API.resourceContentType) -> AnyPublisher<Data, URLError> {
