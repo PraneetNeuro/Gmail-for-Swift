@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 extension Encodable {
-  var dictionary: [String: Any]? {
+  public var dictionary: [String: Any]? {
     guard let data = try? JSONEncoder().encode(self) else { return nil }
     return (try? JSONSerialization.jsonObject(with: data, options: .allowFragments)).flatMap { $0 as? [String: Any] }
   }
@@ -17,13 +17,13 @@ extension Encodable {
 
 extension Gmail.UsersMessages {
     
-    static func decodeToMessageList(publisher: AnyPublisher<Data, URLError>) -> AnyPublisher<MessagesList, Error> {
+    public static func decodeToMessageList(publisher: AnyPublisher<Data, URLError>) -> AnyPublisher<MessagesList, Error> {
         publisher
             .decode(type: MessagesList.self, decoder: JSONDecoder())
             .eraseToAnyPublisher()
     }
     
-    static func decodeToMessage(publisher: AnyPublisher<Data, URLError>) -> AnyPublisher<Message, Error> {
+    public static func decodeToMessage(publisher: AnyPublisher<Data, URLError>) -> AnyPublisher<Message, Error> {
         publisher
             .decode(type: Message.self, decoder: JSONDecoder())
             .eraseToAnyPublisher()
@@ -33,13 +33,13 @@ extension Gmail.UsersMessages {
 
 extension Gmail.UsersThreads {
     
-    static func decodeToThread(publisher: AnyPublisher<Data, URLError>) -> AnyPublisher<Thread, Error> {
+    public static func decodeToThread(publisher: AnyPublisher<Data, URLError>) -> AnyPublisher<Thread, Error> {
         publisher
             .decode(type: Thread.self, decoder: JSONDecoder())
             .eraseToAnyPublisher()
     }
     
-    static func decodeToThreadList(publisher: AnyPublisher<Data, URLError>) -> AnyPublisher<ThreadList, Error> {
+    public static func decodeToThreadList(publisher: AnyPublisher<Data, URLError>) -> AnyPublisher<ThreadList, Error> {
         publisher
             .decode(type: ThreadList.self, decoder: JSONDecoder())
             .eraseToAnyPublisher()
@@ -49,13 +49,13 @@ extension Gmail.UsersThreads {
 
 extension Gmail.UsersLabels {
     
-    static func decodeToLabel(publisher: AnyPublisher<Data, URLError>) -> AnyPublisher<Label, Error> {
+    public static func decodeToLabel(publisher: AnyPublisher<Data, URLError>) -> AnyPublisher<Label, Error> {
         publisher
             .decode(type: Label.self, decoder: JSONDecoder())
             .eraseToAnyPublisher()
     }
     
-    static func decodeToLabelList(publisher: AnyPublisher<Data, URLError>) -> AnyPublisher<LabelList, Error> {
+    public static func decodeToLabelList(publisher: AnyPublisher<Data, URLError>) -> AnyPublisher<LabelList, Error> {
         publisher
             .decode(type: LabelList.self, decoder: JSONDecoder())
             .eraseToAnyPublisher()
@@ -65,25 +65,25 @@ extension Gmail.UsersLabels {
 
 extension Gmail.UsersSettings {
     
-    static func decodeToAutoForwarding(publisher: AnyPublisher<Data, URLError>) -> AnyPublisher<AutoForwarding, Error> {
+    public static func decodeToAutoForwarding(publisher: AnyPublisher<Data, URLError>) -> AnyPublisher<AutoForwarding, Error> {
         publisher
             .decode(type: AutoForwarding.self, decoder: JSONDecoder())
             .eraseToAnyPublisher()
     }
     
-    static func decodeToImapSetttings(publisher: AnyPublisher<Data, URLError>) -> AnyPublisher<ImapSettings, Error> {
+    public static func decodeToImapSetttings(publisher: AnyPublisher<Data, URLError>) -> AnyPublisher<ImapSettings, Error> {
         publisher
             .decode(type: ImapSettings.self, decoder: JSONDecoder())
             .eraseToAnyPublisher()
     }
     
-    static func decodeToLanguageSettings(publisher: AnyPublisher<Data, URLError>) -> AnyPublisher<LanguageSettings, Error> {
+    public static func decodeToLanguageSettings(publisher: AnyPublisher<Data, URLError>) -> AnyPublisher<LanguageSettings, Error> {
         publisher
             .decode(type: LanguageSettings.self, decoder: JSONDecoder())
             .eraseToAnyPublisher()
     }
     
-    static func decodeToPopSettings(publisher: AnyPublisher<Data, URLError>) -> AnyPublisher<PopSettings, Error> {
+    public static func decodeToPopSettings(publisher: AnyPublisher<Data, URLError>) -> AnyPublisher<PopSettings, Error> {
         publisher
             .decode(type: PopSettings.self, decoder: JSONDecoder())
             .eraseToAnyPublisher()
