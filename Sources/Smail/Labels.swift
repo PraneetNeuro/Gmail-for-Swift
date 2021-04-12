@@ -24,18 +24,18 @@ public struct Label : Codable {
       public let threadsUnread: Int?
       public let color: Color?
     
-    enum MessageListVisibility : String, Codable {
+    public enum MessageListVisibility : String, Codable {
         case SHOW
         case HIDE
     }
     
-    enum LabelListVisibility : String, Codable {
+    public enum LabelListVisibility : String, Codable {
         case LABEL_SHOW
         case LABEL_SHOW_IF_UNREAD
         case LABEL_HIDE
     }
     
-    enum Type_ : String, Codable {
+    public enum Type_ : String, Codable {
         case SYSTEM
         case USER
     }
