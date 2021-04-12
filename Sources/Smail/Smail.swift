@@ -3,8 +3,8 @@ import Combine
 
 public class Gmail {
     
-    private static var bearerToken: String = ""
-    private static var defaultHeadersWithAuth = ["Authorization" : "Bearer \(Gmail.bearerToken)"]
+    public static var bearerToken: String = ""
+    public static var defaultHeadersWithAuth = ["Authorization" : "Bearer \(Gmail.bearerToken)"]
     
     public static func setAuth(bearerToken: String) {
         Gmail.bearerToken = bearerToken
