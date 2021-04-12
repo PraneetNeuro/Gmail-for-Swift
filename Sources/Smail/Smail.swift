@@ -7,8 +7,8 @@ public class Smail : ObservableObject {
     
     private var refreshInterval: Int
     
-    @Published var userMessages: MessagesList?
-    @Published var userThreads: ThreadList?
+    @Published public var userMessages: MessagesList?
+    @Published public var userThreads: ThreadList?
     var cancellables: Set<AnyCancellable> = []
     
     
