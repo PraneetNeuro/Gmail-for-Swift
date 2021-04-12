@@ -11,3 +11,9 @@ public struct Draft : Codable {
     public let id: String?
     public let message: Message?
 }
+
+public struct DraftList : Codable {
+    public let drafts: [Draft]?
+    public let nextPageToken: String?
+    public let resultSizeEstimate: Int?
+  }

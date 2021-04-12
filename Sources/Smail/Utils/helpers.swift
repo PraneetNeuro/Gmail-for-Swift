@@ -63,6 +63,14 @@ extension Gmail.UsersLabels {
     
 }
 
+extension Gmail.UsersDrafts {
+    static func decodeToAutoForwarding(publisher: AnyPublisher<Data, URLError>) -> AnyPublisher<DraftList, Error> {
+        publisher
+            .decode(type: DraftList.self, decoder: JSONDecoder())
+            .eraseToAnyPublisher()
+    }
+}
+
 extension Gmail.UsersSettings {
     
     static func decodeToAutoForwarding(publisher: AnyPublisher<Data, URLError>) -> AnyPublisher<AutoForwarding, Error> {

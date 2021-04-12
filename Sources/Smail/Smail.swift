@@ -9,8 +9,9 @@ public class Smail : ObservableObject {
     
     @Published public var userMessages: MessagesList?
     @Published public var userThreads: ThreadList?
-    var cancellables: Set<AnyCancellable> = []
+    @Published public var userLabels: LabelList?
     
+    var cancellables: Set<AnyCancellable> = []
     
     public init(authToken: String, mailID: String, refreshInterval: Int?) {
         Gmail.setAuth(bearerToken: authToken)
@@ -25,6 +26,17 @@ public class Smail : ObservableObject {
                 print(completion)
             }, receiveValue: { threads in
                 self.userThreads = threads
+            })
+            .store(in: &cancellables)
+    }
+    
+    public func fetchUserLabels() {
+        Gmail.UsersLabels.list(userID: self.mailID)
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { completion in
+                print(completion)
+            }, receiveValue: { labels in
+                self.userLabels = labels
             })
             .store(in: &cancellables)
     }
