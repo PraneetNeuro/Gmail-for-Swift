@@ -12,12 +12,19 @@ public class Smail : ObservableObject {
     @Published public var userLabels: LabelList?
     @Published public var userDrafts: DraftList?
     
-    var cancellables: Set<AnyCancellable> = []
+    public var cancellables: Set<AnyCancellable> = []
     
     public init(authToken: String, mailID: String, refreshInterval: Int?) {
         Gmail.setAuth(bearerToken: authToken)
         self.mailID = mailID
         self.refreshInterval = refreshInterval ?? -1
+    }
+    
+    public func draftCompose(draft: Draft, type: API.resourceContentType) -> AnyPublisher<Draft, Error> {
+        Gmail.UsersDrafts.create(userID: "me", type: type, draft: draft.dictionary ?? ["message":["raw":""]])
+            .receive(on: DispatchQueue.main)
+            .decode(type: Draft.self, decoder: JSONDecoder())
+            .eraseToAnyPublisher()
     }
     
     public func fetchUserThreads() {
