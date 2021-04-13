@@ -10,6 +10,10 @@ import Foundation
 public struct Draft : Codable {
     public let id: String?
     public let message: Message?
+    public init(id: String?, message: Message) {
+        self.id = id
+        self.message = message
+    }
 }
 
 public struct DraftList : Codable {

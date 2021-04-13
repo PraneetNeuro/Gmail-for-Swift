@@ -37,6 +37,19 @@ public struct Message : Codable {
     public let payload: MessagePart?
     public let sizeEstimate: Int?
     public let raw: String?
+    public init(id: String?, threadID: String?, labelIDs: [String]?, snippet: String?,
+                historyID: String?, internalDate: String?, payload: MessagePart?,
+                sizeEstimate: Int?, raw: String?) {
+        self.id = id
+        self.threadId = threadID
+        self.labelIds = labelIDs
+        self.snippet = snippet
+        self.historyId = historyID
+        self.internalDate = internalDate
+        self.payload = payload
+        self.sizeEstimate = sizeEstimate
+        self.raw = raw
+    }
 }
 
 public struct MessagesList : Codable {
