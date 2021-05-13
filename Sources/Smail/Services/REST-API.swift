@@ -25,7 +25,7 @@ public class API {
     
     public static var baseURL = "https://gmail.googleapis.com"
     
-    public static func executeRequest(APIRequest: Request, headers: [String : String]?, requestBody: [String : Any]?) -> AnyPublisher<Data, URLError> {
+    public static func executeRequest<T>(APIRequest: Request, headers: [String : String]?, requestBody: [String : Any]?, decodingType: T.Type) -> AnyPublisher<T, Error> where T: Decodable {
 
             let apiRequestURL = URL(string: API.baseURL + APIRequest.requestURL)
             if apiRequestURL == nil {
@@ -42,6 +42,7 @@ public class API {
             
             let publisher = URLSession.shared.dataTaskPublisher(for: request)
                 .map { $0.data }
+                .decode(type: T.self, decoder: JSONDecoder())
                 .eraseToAnyPublisher()
             
             return publisher
