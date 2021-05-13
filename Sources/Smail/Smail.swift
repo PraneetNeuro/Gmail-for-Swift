@@ -30,7 +30,6 @@ public class Smail : ObservableObject {
     public func fetchUserThreads(maxResults: Int? = nil, pageToken: String? = nil, query: String? = nil, labelIDs: String? = nil, includeSpamTrash: Bool? = nil) {
         Gmail.UsersThreads.list(userID: self.mailID, maxResults: maxResults, pageToken: pageToken, query: query, labelIDs: labelIDs, includeSpamTrash: includeSpamTrash)
             .receive(on: DispatchQueue.main)
-            .debounce(for: .seconds(3), scheduler: RunLoop.main)
             .sink(receiveCompletion: { completion in
                 print(completion)
             }, receiveValue: { threads in
