@@ -382,30 +382,50 @@ public class API {
             case .list(userID: let userID, maxResults: let maxResults, pageToken: let pageToken, query: let query, labelIDs: let labelIDs, includeSpamTrash: let includeSpamTrash):
                 var url: String = "/gmail/v1/users/\(userID)/threads"
                 ["maxResults", "pageToken", "q", "labelIDs", "includeSpamTrash"].forEach({ queryParam in
-                    if url.contains("?") {
-                        url.append("&")
-                    } else {
-                        url.append("?")
-                    }
                     switch queryParam {
                     case "maxResults":
                         if let maxResults = maxResults {
+                            if url.contains("?") {
+                                url.append("&")
+                            } else {
+                                url.append("?")
+                            }
                             url.append("\(queryParam)=\(maxResults)")
                         }
                     case "pageToken":
                         if let pageToken = pageToken {
+                            if url.contains("?") {
+                                url.append("&")
+                            } else {
+                                url.append("?")
+                            }
                             url.append("\(queryParam)=\(pageToken)")
                         }
                     case "q":
                         if let query = query {
+                            if url.contains("?") {
+                                url.append("&")
+                            } else {
+                                url.append("?")
+                            }
                             url.append("\(queryParam)=\(query)")
                         }
                     case "labelIDs":
                         if let labelIDs = labelIDs {
+                            if url.contains("?") {
+                                url.append("&")
+                            } else {
+                                url.append("?")
+                            }
                             url.append("\(queryParam)=\(labelIDs)")
                         }
                     case "includeSpamTrash":
                         if let includeSpamTrash = includeSpamTrash {
+                            if url.contains("?") {
+                                url.append("&")
+                            } else {
+                                url.append("?")
+                            }
                             url.append("\(queryParam)=\(includeSpamTrash)")
                         }
                     default:
