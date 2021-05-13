@@ -381,28 +381,37 @@ public class API {
                 return Request(requestURL: "/gmail/v1/users/\(userID)/threads/\(id)", requestMethod: .GET)
             case .list(userID: let userID, maxResults: let maxResults, pageToken: let pageToken, query: let query, labelIDs: let labelIDs, includeSpamTrash: let includeSpamTrash):
                 var url: String = "/gmail/v1/users/\(userID)/threads"
-                for _ in 0..<5 {
+                ["maxResults", "pageToken", "q", "labelIDs", "includeSpamTrash"].forEach({ queryParam in
                     if url.contains("?") {
                         url.append("&")
                     } else {
                         url.append("?")
                     }
-                    if let maxResults = maxResults {
-                        url.append("maxResults=\(maxResults)")
+                    switch queryParam {
+                    case "maxResults":
+                        if let maxResults = maxResults {
+                            url.append("\(queryParam)=\(maxResults)")
+                        }
+                    case "pageToken":
+                        if let pageToken = pageToken {
+                            url.append("\(queryParam)=\(pageToken)")
+                        }
+                    case "q":
+                        if let query = query {
+                            url.append("\(queryParam)=\(query)")
+                        }
+                    case "labelIDs":
+                        if let labelIDs = labelIDs {
+                            url.append("\(queryParam)=\(labelIDs)")
+                        }
+                    case "includeSpamTrash":
+                        if let includeSpamTrash = includeSpamTrash {
+                            url.append("\(queryParam)=\(includeSpamTrash)")
+                        }
+                    default:
+                        break
                     }
-                    if let pageToken = pageToken {
-                        url.append("pageToken=\(pageToken)")
-                    }
-                    if let query = query {
-                        url.append("q=\(query)")
-                    }
-                    if let labelIDs = labelIDs {
-                        url.append("labelIDs=\(labelIDs)")
-                    }
-                    if let includeSpamTrash = includeSpamTrash {
-                        url.append("includeSpamTrash=\(includeSpamTrash)")
-                    }
-                }
+                })
                 print(url)
                 return Request(requestURL: url, requestMethod: .GET)
             case .modify(userID: let userID, id: let id):
