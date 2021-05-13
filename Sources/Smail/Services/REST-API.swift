@@ -381,16 +381,14 @@ public class API {
                 return Request(requestURL: "/gmail/v1/users/\(userID)/threads/\(id)", requestMethod: .GET)
             case .list(userID: let userID, maxResults: let maxResults, pageToken: let pageToken, query: let query, labelIDs: let labelIDs, includeSpamTrash: let includeSpamTrash):
                 var url: String = "/gmail/v1/users/\(userID)/threads"
-                [maxResults, pageToken, query, labelIDs, includeSpamTrash].forEach({ val in
-                    if val != nil {
-                        if url.contains("?") {
-                            url.append("&")
-                        } else {
-                            url.append("?")
-                        }
-                        if let child = Mirror(reflecting: val).children.first {
-                            url.append("\(child.label! == "query" ? "q" : child.label!)=\(child.value)")
-                        }
+                [maxResults, pageToken, query, labelIDs, includeSpamTrash].compactMap({ val in
+                    if url.contains("?") {
+                        url.append("&")
+                    } else {
+                        url.append("?")
+                    }
+                    if let child = Mirror(reflecting: val).children.first {
+                        url.append("\(child.label! == "query" ? "q" : child.label!)=\(child.value)")
                     }
                 })
                 print(url)
