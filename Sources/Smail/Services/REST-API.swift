@@ -389,7 +389,7 @@ public class API {
                             url.append("?")
                         }
                         if let child = Mirror(reflecting: val).children.first {
-                            url.append("\(child.label!)=\(child.value)")
+                            url.append("\(child.label! == "query" ? "q" : child.label!)=\(child.value)")
                         }
                     }
                 })
