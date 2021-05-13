@@ -13,3 +13,16 @@ extension Encodable {
     return (try? JSONSerialization.jsonObject(with: data, options: .allowFragments)).flatMap { $0 as? [String: Any] }
   }
 }
+
+extension String {
+    public func appendQueryParam(queryParam: String, value: Any) -> String {
+        var updatedURL: String = self
+        if self.contains("?") {
+            updatedURL.append("&")
+        } else {
+            updatedURL.append("?")
+        }
+        updatedURL.append("\(queryParam)=\(value)")
+        return updatedURL
+    }
+}
