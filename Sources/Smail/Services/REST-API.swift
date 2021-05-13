@@ -393,6 +393,7 @@ public class API {
                         }
                     }
                 })
+                print(url)
                 return Request(requestURL: url, requestMethod: .GET)
             case .modify(userID: let userID, id: let id):
                 return Request(requestURL: "/gmail/v1/users/\(userID)/threads/\(id)/modify", requestMethod: .POST)
