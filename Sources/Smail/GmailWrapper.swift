@@ -153,8 +153,8 @@ public class Gmail {
             return API.executeRequest(APIRequest: API.usersThreads.get(userID: userID, id: id).request, headers: defaultHeadersWithAuth, requestBody: nil, decodingType: Thread.self)
         }
         
-        public static func list(userID: String) -> AnyPublisher<ThreadList, Error> {
-            return API.executeRequest(APIRequest: API.usersThreads.list(userID: userID).request, headers: defaultHeadersWithAuth, requestBody: nil, decodingType: ThreadList.self)
+        public static func list(userID: String, maxResults: Int?, pageToken: String?, query: String?, labelIDs: String?, includeSpamTrash: Bool?) -> AnyPublisher<ThreadList, Error> {
+            return API.executeRequest(APIRequest: API.usersThreads.list(userID: userID, maxResults: maxResults, pageToken: pageToken, query: query, labelIDs: labelIDs, includeSpamTrash: includeSpamTrash).request, headers: defaultHeadersWithAuth, requestBody: nil, decodingType: ThreadList.self)
         }
         
         public static func trash(userID: String, id: String) -> AnyPublisher<Thread, Error> {

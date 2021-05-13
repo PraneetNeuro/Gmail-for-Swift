@@ -26,26 +26,26 @@ public class API {
     public static var baseURL = "https://gmail.googleapis.com"
     
     public static func executeRequest<T>(APIRequest: Request, headers: [String : String]?, requestBody: [String : Any]?, decodingType: T.Type) -> AnyPublisher<T, Error> where T: Decodable {
-
-            let apiRequestURL = URL(string: API.baseURL + APIRequest.requestURL)
-            if apiRequestURL == nil {
-                return Fail(error: URLError(.badURL)).eraseToAnyPublisher()
-            }
-            
-            var request = URLRequest(url: apiRequestURL!)
-            request.httpMethod = APIRequest.requestMethod.rawValue
-            if let requestBody = requestBody {
-                let jsonData = try? JSONSerialization.data(withJSONObject: requestBody)
-                request.httpBody = jsonData
-            }
-            request.allHTTPHeaderFields = headers
-            
-            let publisher = URLSession.shared.dataTaskPublisher(for: request)
-                .map { $0.data }
-                .decode(type: T.self, decoder: JSONDecoder())
-                .eraseToAnyPublisher()
-            
-            return publisher
+        
+        let apiRequestURL = URL(string: API.baseURL + APIRequest.requestURL)
+        if apiRequestURL == nil {
+            return Fail(error: URLError(.badURL)).eraseToAnyPublisher()
+        }
+        
+        var request = URLRequest(url: apiRequestURL!)
+        request.httpMethod = APIRequest.requestMethod.rawValue
+        if let requestBody = requestBody {
+            let jsonData = try? JSONSerialization.data(withJSONObject: requestBody)
+            request.httpBody = jsonData
+        }
+        request.allHTTPHeaderFields = headers
+        
+        let publisher = URLSession.shared.dataTaskPublisher(for: request)
+            .map { $0.data }
+            .decode(type: T.self, decoder: JSONDecoder())
+            .eraseToAnyPublisher()
+        
+        return publisher
     }
     
     public enum resourceContentType {
@@ -368,7 +368,7 @@ public class API {
     public enum usersThreads {
         case delete(userID: String, id: String)
         case get(userID: String, id: String)
-        case list(userID: String)
+        case list(userID: String, maxResults: Int?, pageToken: String?, query: String?, labelIDs: String?, includeSpamTrash: Bool?)
         case modify(userID: String, id: String)
         case trash(userID: String, id: String)
         case untrash(userID: String, id: String)
@@ -379,8 +379,21 @@ public class API {
                 return Request(requestURL: "/gmail/v1/users/\(userID)/threads/\(id)", requestMethod: .DELETE)
             case .get(userID: let userID, id: let id):
                 return Request(requestURL: "/gmail/v1/users/\(userID)/threads/\(id)", requestMethod: .GET)
-            case .list(userID: let userID):
-                return Request(requestURL: "/gmail/v1/users/\(userID)/threads", requestMethod: .GET)
+            case .list(userID: let userID, maxResults: let maxResults, pageToken: let pageToken, query: let query, labelIDs: let labelIDs, includeSpamTrash: let includeSpamTrash):
+                var url: String = "/gmail/v1/users/\(userID)/threads"
+                [maxResults, pageToken, query, labelIDs, includeSpamTrash].forEach({ val in
+                    if val != nil {
+                        if url.contains("?") {
+                            url.append("&")
+                        } else {
+                            url.append("?")
+                        }
+                        if let child = Mirror(reflecting: val).children.first {
+                            url.append("\(child.label!)=\(child.value)")
+                        }
+                    }
+                })
+                return Request(requestURL: url, requestMethod: .GET)
             case .modify(userID: let userID, id: let id):
                 return Request(requestURL: "/gmail/v1/users/\(userID)/threads/\(id)/modify", requestMethod: .POST)
             case .trash(userID: let userID, id: let id):

@@ -27,8 +27,8 @@ public class Smail : ObservableObject {
             .eraseToAnyPublisher()
     }
     
-    public func fetchUserThreads() {
-        Gmail.UsersThreads.list(userID: self.mailID)
+    public func fetchUserThreads(maxResults: Int? = nil, pageToken: String? = nil, query: String? = nil, labelIDs: String? = nil, includeSpamTrash: Bool? = nil) {
+        Gmail.UsersThreads.list(userID: self.mailID, maxResults: maxResults, pageToken: pageToken, query: query, labelIDs: labelIDs, includeSpamTrash: includeSpamTrash)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { completion in
                 print(completion)
