@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Thread : Codable {
+public struct MailThread : Codable {
     public let id: String?
     public let snippet: String?
     public let historyId: String?
@@ -15,7 +15,7 @@ public struct Thread : Codable {
 }
 
 public struct ThreadList : Codable {
-    public let threads: [Thread]?
+    public let threads: [MailThread]?
     public let nextPageToken: String?
     public let resultSizeEstimate: Int?
 }

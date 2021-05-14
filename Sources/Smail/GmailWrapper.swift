@@ -149,28 +149,28 @@ public class Gmail {
     
     public class UsersThreads {
         
-        public static func get(userID: String, id: String) -> AnyPublisher<Thread, Error> {
-            return API.executeRequest(APIRequest: API.usersThreads.get(userID: userID, id: id).request, headers: defaultHeadersWithAuth, requestBody: nil, decodingType: Thread.self)
+        public static func get(userID: String, id: String) -> AnyPublisher<MailThread, Error> {
+            return API.executeRequest(APIRequest: API.usersThreads.get(userID: userID, id: id).request, headers: defaultHeadersWithAuth, requestBody: nil, decodingType: MailThread.self)
         }
         
         public static func list(userID: String, maxResults: Int?, pageToken: String?, query: String?, labelIDs: String?, includeSpamTrash: Bool?) -> AnyPublisher<ThreadList, Error> {
             return API.executeRequest(APIRequest: API.usersThreads.list(userID: userID, maxResults: maxResults, pageToken: pageToken, query: query, labelIDs: labelIDs, includeSpamTrash: includeSpamTrash).request, headers: defaultHeadersWithAuth, requestBody: nil, decodingType: ThreadList.self)
         }
         
-        public static func trash(userID: String, id: String) -> AnyPublisher<Thread, Error> {
-            return API.executeRequest(APIRequest: API.usersThreads.trash(userID: userID, id: id).request, headers: defaultHeadersWithAuth, requestBody: nil, decodingType: Thread.self)
+        public static func trash(userID: String, id: String) -> AnyPublisher<MailThread, Error> {
+            return API.executeRequest(APIRequest: API.usersThreads.trash(userID: userID, id: id).request, headers: defaultHeadersWithAuth, requestBody: nil, decodingType: MailThread.self)
         }
         
-        public static func untrash(userID: String, id: String) -> AnyPublisher<Thread, Error> {
-            return API.executeRequest(APIRequest: API.usersThreads.untrash(userID: userID, id: id).request, headers: defaultHeadersWithAuth, requestBody: nil, decodingType: Thread.self)
+        public static func untrash(userID: String, id: String) -> AnyPublisher<MailThread, Error> {
+            return API.executeRequest(APIRequest: API.usersThreads.untrash(userID: userID, id: id).request, headers: defaultHeadersWithAuth, requestBody: nil, decodingType: MailThread.self)
         }
         
         public static func delete(userID: String, id: String) -> AnyPublisher<Data, Error> {
             return API.executeRequest(APIRequest: API.usersThreads.delete(userID: userID, id: id).request, headers: defaultHeadersWithAuth, requestBody: nil, decodingType: Data.self)
         }
         
-        public static func modify(userID: String, id: String, requestBody: ThreadModifyBody) -> AnyPublisher<Thread, Error> {
-            return API.executeRequest(APIRequest: API.usersThreads.untrash(userID: userID, id: id).request, headers: defaultHeadersWithAuth, requestBody: requestBody.dictionary, decodingType: Thread.self)
+        public static func modify(userID: String, id: String, requestBody: ThreadModifyBody) -> AnyPublisher<MailThread, Error> {
+            return API.executeRequest(APIRequest: API.usersThreads.untrash(userID: userID, id: id).request, headers: defaultHeadersWithAuth, requestBody: requestBody.dictionary, decodingType: MailThread.self)
         }
         
     }
