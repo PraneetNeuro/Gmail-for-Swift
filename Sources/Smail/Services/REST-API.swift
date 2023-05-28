@@ -48,6 +48,35 @@ public class API {
         return publisher
     }
     
+    public static func executeRequest<T>(APIRequest: Request, headers: [String : String]?, requestBody: [String : Any]?, decodingType: T.Type) async -> T? where T: Decodable {
+        
+        let apiRequestURL = URL(string: API.baseURL + APIRequest.requestURL)
+        if apiRequestURL == nil {
+            return nil
+        }
+        
+        var request = URLRequest(url: apiRequestURL!)
+        request.httpMethod = APIRequest.requestMethod.rawValue
+        if let requestBody = requestBody {
+            let jsonData = try? JSONSerialization.data(withJSONObject: requestBody)
+            request.httpBody = jsonData
+        }
+        request.allHTTPHeaderFields = headers
+        
+        do {
+            let data = try await URLSession.shared.data(for: request)
+            let response = try JSONDecoder().decode(T.self, from: data.0)
+            return response
+        } catch {
+            print(error)
+        }
+//            .map { $0.data }
+//            .decode(type: T.self, decoder: JSONDecoder())
+//            .eraseToAnyPublisher()
+        
+        return nil
+    }
+    
     public enum resourceContentType {
         case Media
         case Metadata
