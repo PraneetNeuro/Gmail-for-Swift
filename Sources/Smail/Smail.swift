@@ -3,9 +3,9 @@ import Combine
 
 public class Smail : ObservableObject {
     
-    private var mailID: String
+    private var mailID: String?
     
-    private var refreshInterval: Int
+    private var refreshInterval: Int?
     
     @Published public var userMessages: MessagesList?
     @Published public var userThreads: ThreadList?
@@ -14,7 +14,13 @@ public class Smail : ObservableObject {
     
     public var cancellables: Set<AnyCancellable> = []
     
-    public init(authToken: String, mailID: String, refreshInterval: Int?) {
+    public static var shared: Smail = Smail()
+    
+    public init() {
+        
+    }
+    
+    public func authenticate(authToken: String, mailID: String, refreshInterval: Int?) {
         Gmail.setAuth(bearerToken: authToken)
         self.mailID = mailID
         self.refreshInterval = refreshInterval ?? -1
@@ -28,7 +34,7 @@ public class Smail : ObservableObject {
     }
     
     public func fetchUserThreads(maxResults: Int? = nil, pageToken: String? = nil, query: String? = nil, labelIDs: String? = nil, includeSpamTrash: Bool? = nil) {
-        Gmail.UsersThreads.list(userID: self.mailID, maxResults: maxResults, pageToken: pageToken, query: query, labelIDs: labelIDs, includeSpamTrash: includeSpamTrash)
+        Gmail.UsersThreads.list(userID: self.mailID!, maxResults: maxResults, pageToken: pageToken, query: query, labelIDs: labelIDs, includeSpamTrash: includeSpamTrash)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { completion in
                 print(completion)
@@ -40,7 +46,7 @@ public class Smail : ObservableObject {
     }
     
     public func fetchUserLabels() {
-        Gmail.UsersLabels.list(userID: self.mailID)
+        Gmail.UsersLabels.list(userID: self.mailID!)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { completion in
                 print(completion)
@@ -52,7 +58,7 @@ public class Smail : ObservableObject {
     }
     
     public func fetchUserDrafts() {
-        Gmail.UsersDrafts.list(userID: self.mailID)
+        Gmail.UsersDrafts.list(userID: self.mailID!)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { completion in
                 print(completion)
@@ -64,7 +70,7 @@ public class Smail : ObservableObject {
     }
     
     public func fetchUserMessages() {
-        Gmail.UsersMessages.list(userID: self.mailID)
+        Gmail.UsersMessages.list(userID: self.mailID!)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { completion in
                 print(completion)
