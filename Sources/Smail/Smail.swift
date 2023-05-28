@@ -81,5 +81,9 @@ public class Smail : ObservableObject {
             .store(in: &cancellables)
     }
     
+    public func fetchUserThreads(maxResults: Int? = nil, pageToken: String? = nil, query: String? = nil, labelIDs: String? = nil, includeSpamTrash: Bool? = nil) async {
+        self.userThreads = await Gmail.UsersThreads.list(userID: self.mailID!, maxResults: maxResults, pageToken: pageToken, query: query, labelIDs: labelIDs, includeSpamTrash: includeSpamTrash)
+    }
+    
     
 }

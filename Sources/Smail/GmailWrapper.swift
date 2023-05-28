@@ -141,6 +141,10 @@ public class Gmail {
             return API.executeRequest(APIRequest: API.usersMessages.list(userID: userID).request, headers: defaultHeadersWithAuth, requestBody: nil, decodingType: MessagesList.self)
         }
         
+        public static func list(userID: String) async -> MessagesList? {
+            return await API.executeRequest(APIRequest: API.usersMessages.list(userID: userID).request, headers: defaultHeadersWithAuth, requestBody: nil, decodingType: MessagesList.self)
+        }
+        
         public static func get(userID: String, id: String) -> AnyPublisher<Message, Error> {
             return API.executeRequest(APIRequest: API.usersMessages.get(userID: userID, id: id).request, headers: defaultHeadersWithAuth, requestBody: nil, decodingType: Message.self)
         }
@@ -155,6 +159,10 @@ public class Gmail {
         
         public static func list(userID: String, maxResults: Int?, pageToken: String?, query: String?, labelIDs: String?, includeSpamTrash: Bool?) -> AnyPublisher<ThreadList, Error> {
             return API.executeRequest(APIRequest: API.usersThreads.list(userID: userID, maxResults: maxResults, pageToken: pageToken, query: query, labelIDs: labelIDs, includeSpamTrash: includeSpamTrash).request, headers: defaultHeadersWithAuth, requestBody: nil, decodingType: ThreadList.self)
+        }
+        
+        public static func list(userID: String, maxResults: Int?, pageToken: String?, query: String?, labelIDs: String?, includeSpamTrash: Bool?) async -> ThreadList? {
+            return await API.executeRequest(APIRequest: API.usersThreads.list(userID: userID, maxResults: maxResults, pageToken: pageToken, query: query, labelIDs: labelIDs, includeSpamTrash: includeSpamTrash).request, headers: defaultHeadersWithAuth, requestBody: nil, decodingType: ThreadList.self)
         }
         
         public static func trash(userID: String, id: String) -> AnyPublisher<MailThread, Error> {
