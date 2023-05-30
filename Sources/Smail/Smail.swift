@@ -14,8 +14,6 @@ public class Smail : ObservableObject {
     
     public var cancellables: Set<AnyCancellable> = []
     
-    public static var shared: Smail = Smail()
-    
     public init() {
         
     }
