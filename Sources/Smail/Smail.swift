@@ -35,10 +35,10 @@ public class Smail : ObservableObject {
         Gmail.UsersThreads.list(userID: self.mailID!, maxResults: maxResults, pageToken: pageToken, query: query, labelIDs: labelIDs, includeSpamTrash: includeSpamTrash)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { completion in
-                print(completion)
+//                print(completion)
             }, receiveValue: { threads in
                 self.userThreads = threads
-                print(threads)
+//                print(threads)
             })
             .store(in: &cancellables)
     }
@@ -47,10 +47,10 @@ public class Smail : ObservableObject {
         Gmail.UsersLabels.list(userID: self.mailID!)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { completion in
-                print(completion)
+//                print(completion)
             }, receiveValue: { labels in
                 self.userLabels = labels
-                print(labels)
+//                print(labels)
             })
             .store(in: &cancellables)
     }
@@ -59,10 +59,10 @@ public class Smail : ObservableObject {
         Gmail.UsersDrafts.list(userID: self.mailID!)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { completion in
-                print(completion)
+//                print(completion)
             }, receiveValue: { drafts in
                 self.userDrafts = drafts
-                print(drafts)
+//                print(drafts)
             })
             .store(in: &cancellables)
     }
@@ -71,10 +71,10 @@ public class Smail : ObservableObject {
         Gmail.UsersMessages.list(userID: self.mailID!)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { completion in
-                print(completion)
+//                print(completion)
             }, receiveValue: { messages in
                 self.userMessages = messages
-                print(messages)
+//                print(messages)
             })
             .store(in: &cancellables)
     }

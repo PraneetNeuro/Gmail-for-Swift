@@ -68,7 +68,7 @@ public class API {
             let response = try JSONDecoder().decode(T.self, from: data.0)
             return response
         } catch {
-            print(error)
+//            print(error)
         }
 //            .map { $0.data }
 //            .decode(type: T.self, decoder: JSONDecoder())
@@ -436,7 +436,7 @@ public class API {
                         break
                     }
                 })
-                print(url)
+//                print(url)
                 return Request(requestURL: url, requestMethod: .GET)
             case .modify(userID: let userID, id: let id):
                 return Request(requestURL: "/gmail/v1/users/\(userID)/threads/\(id)/modify", requestMethod: .POST)
